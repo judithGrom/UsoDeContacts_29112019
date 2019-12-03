@@ -13,7 +13,7 @@
         var options = new ContactFindOptions();
         options.filter = "";      // la cadena de búsqueda vacía devuelve todos los contactos
         options.multiple = true;  // devolver múltiples resultados
-        filter = ["displayName", "phoneNumbers"]; // campo contact.displayName de retorno
+        filter = ["displayName", "phoneNumber"]; // campo contact.displayName de retorno
 
         // encontrar contactos
         navigator.contacts.find(filter, onSuccess, onError, options);
@@ -22,7 +22,7 @@
     // onSuccess: obtenga una instantánea de los contactos actuales
     function onSuccess(contacts) {
         for (var i=0; i<contacts.length; i++) {
-            alert(contacts[i].displayName + contacts[i].phoneNumbers[0].value);
+            alert(contacts[i].displayName + "\n" + contacts[i].phoneNumber[0].value);
         }
     };
 
