@@ -1,41 +1,47 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Contact Example</title>
-        <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
-        <script type="text/javascript" charset="utf-8">
+  <head>
+    <title>Contact Example</title>
 
-            // Wait for device API libraries to load
-            document.addEventListener("deviceready", onDeviceReady, false);
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8">
 
-            // device APIs are available
+    // Wait for device API libraries to load
+    //
+    document.addEventListener("deviceready", onDeviceReady, false);
 
-            function onDeviceReady() {
-                // find all contacts with 'Bob' in any name field
-                var options = new ContactFindOptions();
-                options.filter = "";
-                var fields = ["displayName", "name"];
-                navigator.contacts.find(fields, onSuccess, onError, options);
-            }
+    // device APIs are available
+    //
+    function onDeviceReady() {
+        // specify contact search criteria
+        var options = new ContactFindOptions();
+        options.filter = "";      // empty search string returns all contacts
+        options.multiple = true;  // return multiple results
+        filter = ["displayName"]; // return contact.displayName field
 
-            // onSuccess: Get a snapshot of the current contacts
+        // find contacts
+        navigator.contacts.find(filter, onSuccess, onError, options);
+    }
 
-            function onSuccess(contacts) {
-                for (var i = 0; i < contacts.length; i++) {
-                    console.log("Display Name = " + contacts[i].displayName);
-                }
-            }
+    // onSuccess: Get a snapshot of the current contacts
+    //
+    function onSuccess(contacts) {
+        for (var i=0; i<contacts.length; i++) {
+            alert(contacts[i].displayName);
+        }
+    };
 
-            // onError: Failed to get the contacts
+    // onError: Failed to get the contacts
+    //
+    function onError(contactError) {
+        alert('onError!');
+    }
 
-            function onError(contactError) {
-                alert('onError!');
-            }
-        </script>
-    </head>
-
-    <body>
-        <h1>Example</h1>
-        <p>Find Contacts</p>
-    </body>
+    </script>
+  </head>
+  <body>
+    <h1>Contacts por Alert</h1>
+    <p>Aguirre Frías</p>
+    <p>Guerrero Mariana</p>
+  </body>
 </html>
