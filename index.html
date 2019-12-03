@@ -13,56 +13,35 @@
     // device APIs are available
     //
     function onDeviceReady() {
-        // create
-        var contact = navigator.contacts.create();
-        contact.displayName = "Plumber";
-        contact.nickname = "Plumber";                 // specify both to support all devices
-        var name = new ContactName();
-        name.givenName = "Jane";
-        name.familyName = "Doe";
-        contact.name = name;
-
-        // save
-        contact.save(onSaveSuccess,onSaveError);
-
-        // clone
-        var clone = contact.clone();
-        clone.name.givenName = "John";
-        console.log("Original contact name = " + contact.name.givenName);
-        console.log("Cloned contact name = " + clone.name.givenName);
-
-        // remove
-        contact.remove(onRemoveSuccess,onRemoveError);
+        var options = new ContactFindOptions();
+        options.filter="";
+        filter = ["displayName","name"];
+        navigator.contacts.find(filter, onSuccess, onError, options);
     }
 
-    // onSaveSuccess: Get a snapshot of the current contacts
+    // onSuccess: Get a snapshot of the current contacts
     //
-    function onSaveSuccess(contact) {
-        alert("Save Success");
-    }
+    function onSuccess(contacts) {
+        for (var i = 0; i < contacts.length; i ++) {
+            alert("Formatted: " + contacts[i].name.formatted       + "\n" +
+                "Family Name: " + contacts[i].name.familyName      + "\n" +
+                "Given Name: "  + contacts[i].name.givenName       + "\n" +
+                "Middle Name: " + contacts[i].name.middleName      + "\n" +
+                "Suffix: "      + contacts[i].name.honorificSuffix + "\n" +
+                "Prefix: "      + contacts[i].name.honorificPrefix);
+        }
+    };
 
-    // onSaveError: Failed to get the contacts
+    // onError: Failed to get the contacts
     //
-    function onSaveError(contactError) {
-        alert("Error = " + contactError.code);
-    }
-
-    // onRemoveSuccess: Get a snapshot of the current contacts
-    //
-    function onRemoveSuccess(contacts) {
-        alert("Removal Success");
-    }
-
-    // onRemoveError: Failed to get the contacts
-    //
-    function onRemoveError(contactError) {
-        alert("Error = " + contactError.code);
+    function onError(contactError) {
+        alert('onError!');
     }
 
     </script>
   </head>
   <body>
     <h1>Example</h1>
-    <p>Guerrero Mariana</p>
+    <p>Find Contacts</p>
   </body>
 </html>
