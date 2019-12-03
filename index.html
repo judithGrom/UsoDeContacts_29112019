@@ -13,22 +13,21 @@
     // device APIs are available
     //
     function onDeviceReady() {
+        // specify contact search criteria
         var options = new ContactFindOptions();
-        options.filter="";
-        filter = ["displayName","name"];
+        options.filter = "";      // empty search string returns all contacts
+        options.multiple = true;  // return multiple results
+        filter = ["displayName"]; // return contact.displayName field
+
+        // find contacts
         navigator.contacts.find(filter, onSuccess, onError, options);
     }
 
     // onSuccess: Get a snapshot of the current contacts
     //
     function onSuccess(contacts) {
-        for (var i = 0; i < contacts.length; i ++) {
-            alert("Formatted: " + contacts[i].name.formatted       + "\n" +
-                "Family Name: " + contacts[i].name.familyName      + "\n" +
-                "Given Name: "  + contacts[i].name.givenName       + "\n" +
-                "Middle Name: " + contacts[i].name.middleName      + "\n" +
-                "Suffix: "      + contacts[i].name.honorificSuffix + "\n" +
-                "Prefix: "      + contacts[i].name.honorificPrefix);
+        for (var i=0; i<contacts.length; i++) {
+            alert(contacts[i].displayName);
         }
     };
 
