@@ -27,7 +27,11 @@
     //
     function onSuccess(contacts) {
         for (var i=0; i<contacts.length; i++) {
-             alert(contacts[i].displayName + contacts[i].phoneNumber);
+            alert(var name = contacts[i].displayName.formatted;   
+        var phoneNumber = contacts[i].phoneNumbers[0].value;   
+        var li = document.createElement('li');   
+        li.innerHTML = "<a href=\"tel://"+phoneNumber+"\">"+name+"</a>";   
+        ul.appendChild(li);  );
         }
     };
 
