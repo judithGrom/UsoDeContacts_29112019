@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Contact Example</title>
+
+    <script type="text/javascript" charset="utf-8" src="cordova.js"></script>
+    <script type="text/javascript" charset="utf-8">
+
+    document.addEventListener("deviceready", onDeviceReady, false);
+
+    function onDeviceReady() {
+        // especificar criterios de búsqueda de contactos
+        var options = new ContactFindOptions();
+        options.filter = "";      // la cadena de búsqueda vacía devuelve todos los contactos
+        options.multiple = true;  // devolver múltiples resultados
+        filter = ["displayName"]; // campo contact.displayName de retorno
+
+        // encontrar contactos
+        navigator.contacts.find(filter, onSuccess, onError, options);
+    }
+
+    // onSuccess: obtenga una instantánea de los contactos actuales
+    function onSuccess(contacts) {
+        for (var i=0; i<contacts.length; i++) {
+            alert(contacts[i].displayName);
+        }
+    };
+
+    // onError: no se pudieron obtener los contactos
+    function onError(contactError) {
+        alert('onError!');
+    }
+
+    </script>
+  </head>
+  <body>
+    <h1>Contacts</h1>
+    <p>Aguirre Frías</p>
+    <p>Guerrero Mariana</p>
+  </body>
+</html>
